@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <link rel="stylesheet" href="{{url_for('static', filename = 'style.css')}}" >
+    <link rel="shortcut icon" type="image/x-icon" href="{{url_for('static', filename = 'python.ico')}}" />
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+</head>
+<body>
+    <div class="navbar navbar-light bg-light mb-3">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/"><img src="{{url_for('static', filename = 'logoINEC.png')}}" style=" height: 55px;" alt="">
+              </a>
+            <ul class="nav nav-pills me-5">
+                <li class="nav-item dropdown me-5">
+                    <a class="nav-link dropdown-toggle text-light btn-outline-light" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><strong style="font-size:18px">Proyecto</strong> </a>
+                    <ul class="dropdown-menu">
+                    <li><a class="dropdown-item " href="/proyectoDatos">Datos</a></li>
+                    <li><a class="dropdown-item" href="/proyectoAnalisis">Análisis</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown me-5">
+                    <a class="nav-link dropdown-toggle text-light btn-outline-light" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><strong style="font-size:18px">Números aletorios</strong></a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/cuadradosMedios">Método cuadrados medios</a></li>
+                        <li><a class="dropdown-item" href="/congruenciaLineal">Método congruencia lineal</a></li>
+                        <li><a class="dropdown-item" href="/congruencialMultiplicativo">Método congruencial multiplicativo</a></li>
+                        <li><a class="dropdown-item" href="/distribucionPoisson">Distribucion de poisson</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown me-5">
+                    <a class="nav-link dropdown-toggle text-light btn-outline-light" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><strong style="font-size:18px">Pronósticos</strong></a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/promedioMovil">Promedio móvil</a></li>
+                        <li><a class="dropdown-item" href="/suavizacionExponencial">Suavización exponencial</a></li>
+                        <li><a class="dropdown-item" href="/regresionLineal">Regresión lineal</a></li>
+                        <li><a class="dropdown-item" href="/regresionCuadratica">Regresión cuadrada</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown me-5">
+                    <a class="nav-link dropdown-toggle text-light btn-outline-light" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><strong style="font-size:18px">Simulación</strong></a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/sistemaMontecarlo">Montecarlo </a></li>
+                        <li><a class="dropdown-item" href="/inventario">Modelo de inventario</a></li>
+                        <li><a class="dropdown-item" href="/lineaEspera">Linea de Espera </a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        {% block content %}
+    
+        {% endblock %}
+    </div>
+</body>
+</html>

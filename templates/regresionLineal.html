@@ -1,0 +1,113 @@
+{% extends 'index.html' %}
+{% block title %} Regresión lineal {% endblock %}
+{% block content %}
+<div id="app">
+    {% if imagen2 %}
+    <center>
+        <br>
+        <h2 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+            <strong>Resultados</strong>
+        </h2>
+        <br>
+    </center>
+    <h3>Datos generados</h3>
+    <br>
+        <div class="card my-3 w-100">
+            <div class="row g-0">
+              <div class="col-md-8">
+                <img src="data:image/png;base64,{{imagen2}}" class="img-fluid rounded-start" alt="grafica">
+              </div>
+              <div class="col-md-4">
+                <div class="card-body">
+                    <center>
+                        <br><br><br><br><br><br>
+                        <h5 class="card-title"><strong>Gráfica de la Regresion Lineal</strong></h5>
+                    </center>
+                  <p class="card-text" align="justify">En el siguiente apartado se muestra una grafica realizada con el metodo de regresion lineal con una parte de los datos obtenidos </p>
+                </div>
+              </div>
+            </div> 
+        </div>
+    {% else %}
+    <center>
+        <br>
+        <h2 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><strong>Regresión lineal</strong>
+        </h2>
+        <br><br>
+    </center>
+        {% if error %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+        <form action="/regresionLineal" method="post">
+            <div class="mb-3">
+                <input 
+                    type="text" 
+                    class="form-control"
+                    placeholder="Nombre del eje X"
+                    name="xlbl"
+                    required
+                    v-model = "xlbl"
+                >
+            </div>
+            <div class="mb-3">
+                <textarea 
+                    name="x"  
+                    rows="3"
+                    class="form-control"
+                    placeholder="Datos del eje X (solo numeros seperados por , )"
+                    required
+                    v-model = "x"
+                ></textarea>
+            </div>
+            <div class="mb-3">
+                <input 
+                    type="text" 
+                    class="form-control"
+                    placeholder="Nombre del eje Y"
+                    name="ylbl"
+                    required
+                    v-model = "ylbl"
+                >
+            </div>
+            <div class="mb-3">
+                <textarea 
+                    name="y"  
+                    rows="3"
+                    class="form-control"
+                    placeholder="Datos del eje Y (solo numeros seperados por , )"
+                    required
+                    v-model = "y"
+                ></textarea>
+            </div>
+            <center>
+                <button class="btn btn-secondary" style="margin-right: 30px;" @click="llenarCampos()">Decesos Diabetes en Manabi</button>
+                <button type="submit" class="btn btn-success" style="width: 300px;">Calcular</button>
+            </center>
+        </form>
+    {% endif %}
+</div>
+<script>
+    const app = {
+        data(){
+            return{
+                xlbl: null,
+                x: null,
+                ylbl: null,
+                y: null
+            }
+        },
+        methods:{
+            llenarCampos(){
+                this.xlbl = 'Años';
+                this.ylbl = 'Casos';
+                this.x = '2014,2015,2016,2017,2018,2019';
+                this.y = ('427,567,661,642,617,624')
+
+            }
+        }
+    }
+    Vue.createApp(app).mount("#app")
+</script>
+{% endblock %}

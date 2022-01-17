@@ -1,0 +1,114 @@
+{% extends 'index.html' %}
+{% block title %} Linea de Espera {% endblock %}
+{% block content %}
+<div id="app">
+    {% if imagen %}
+    <center>
+        <br>
+        <h2 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+            <strong>Resultados</strong>
+        </h2>
+        <br>
+    </center>
+    <h3>Datos generados</h3>
+    <br>
+    <div class="card border-info mb-3">
+        <table class="table table-striped">
+            <thead>
+                {% for c in df.columns %}
+                <th>{{ c }}</th>
+                {% endfor %}
+            </thead>
+            <tbody>
+                {% for i in df.iterrows() %}
+                <tr>
+                    <td>{{ i[1][0] }}</td>
+                    <td>{{ i[1][1] }}</td>
+                    <td>{{ i[1][2] }}</td>
+                    <td>{{ i[1][3] }}</td>
+                    <td>{{ i[1][4] }}</td>
+                    <td>{{ i[1][5] }}</td>
+                    <td>{{ i[1][6] }}</td>
+                    <td>{{ i[1][7] }}</td>
+                    <td>{{ i[1][8] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="card my-3 w-100">
+                <center>
+                    <img src="data:image/png;base64,{{imagen}}" class="img-fluid rounded-start" alt="grafica">
+                </center>
+        </div>
+    </div>
+    {% else %}
+    <center>
+        <br>
+        <h2 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><strong>Simulacion de Linea de espera</strong>
+        </h2>
+        <br><br>
+    </center>
+        {% if error %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+        <form action="/lineaEspera" method="post">
+            <div class="mb-3">
+                <input 
+                    type="text" 
+                    class="form-control"
+                    placeholder="landa"
+                    name="landa"
+                    required
+                    v-model = "landa"
+                >
+            </div>
+            <div class="mb-3">
+                <input 
+                    type="text" 
+                    class="form-control"
+                    placeholder="nu"
+                    name="nu"
+                    required
+                    v-model = "nu"
+                >
+            </div>
+            <div class="mb-3">
+                <input 
+                    type="text" 
+                    class="form-control"
+                    placeholder="Numero de clientes"
+                    name="numClientes"
+                    required
+                    v-model = "numClientes"
+                >
+            </div>
+            <center>
+                <button class="btn btn-secondary" style="margin-right: 30px;" @click="llenarCampos()">Ejemplo</button>
+                <button type="submit" class="btn btn-success">Calcular</button>
+            </center>
+        </form>
+    {% endif %}
+</div>
+<script>
+    const app = {
+        data(){
+            return{
+                landa: null,
+                nu: null,
+                numClientes: null
+            }
+        },
+        methods:{
+            llenarCampos(){
+                this.landa = 1.3333
+                this.nu = 4.0
+                this.numClientes = 20
+
+            }
+        }
+    }
+    Vue.createApp(app).mount("#app")
+</script>
+{% endblock %}

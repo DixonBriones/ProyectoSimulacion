@@ -1,0 +1,160 @@
+{% extends 'index.html' %}
+{% block title %} Inventario {% endblock %}
+{% block content %}
+<div id="app">
+    {% if imagen %}
+    <center>
+        <br>
+        <h2 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+            <strong>Resultados</strong>
+        </h2>
+        <br>
+    </center>
+    <h3>Datos generados</h3>
+    <br>
+    <div class="card border-info mb-3">
+        <table class="table table-striped">
+            <thead>
+                {% for i in df.columns %}
+                <th>{{ i }}</th>
+                {% endfor %}
+            </thead>
+            <tbody>
+                {% for i in df.iterrows() %}
+                <tr>
+                    <td>{{ i[1][0] }}</td>
+                    <td>{{ i[1][1] }}</td>
+                    <td>{{ i[1][2] }}</td>
+                    <td>{{ i[1][3] }}</td>
+                    <td>{{ i[1][4] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="card my-3 w-100">
+            <div class="row g-0">
+                <div class="col-md-8">
+                <img src="data:image/png;base64,{{imagen}}" class="img-fluid rounded-start" alt="grafica">
+                </div>
+                <div class="col-md-4">
+                <div class="card-body">
+                    <p class="card-text">Cantidad Optima de Pedito Q = {{datos['Q']}}</p>
+                    <p class="card-text">Costo total de Ordenar CoT = {{datos['CoT']}}</p>
+                    <p class="card-text">Costo total de Mantener Inventario ChT = {{datos['ChT']}}</p>
+                    <p class="card-text">Costo Total de Ordenar y Mantener Inventario MO(O) = {{datos['MOQ']}}</p>
+                    <p class="card-text">Costo Total del Sistema de Inventario CTT = {{datos['CTT']}}</p>
+                    <p class="card-text">Número total de pedidos = {{datos['N']}}</p>
+                    <p class="card-text">Punto de reorden = R {{datos['R']}}</p>
+                    <p class="card-text">Tiempo de Pedido = {{datos['T']}}</p>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <center>
+        <br>
+        <h2 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><strong>Simulacion de Inventario</strong>
+        </h2>
+        <br><br>
+    </center>
+        {% if error %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+        <form action="/inventario" method="post">
+            <div class="mb-3">
+                <input 
+                    type="text" 
+                    class="form-control"
+                    placeholder="Demanda"
+                    name="D"
+                    required
+                    v-model = "D"
+                >
+            </div>
+            <div class="mb-3">
+                <input 
+                    type="text" 
+                    class="form-control"
+                    placeholder="Costo de ordenar"
+                    name="Co"
+                    required
+                    v-model = "Co"
+                >
+            </div>
+            <div class="mb-3">
+                <input 
+                    type="text" 
+                    class="form-control"
+                    placeholder="Costo de Mantenimiento"
+                    name="Ch"
+                    required
+                    v-model = "Ch"
+                >
+            </div>
+            <div class="mb-3">
+                <input 
+                    type="text" 
+                    class="form-control"
+                    placeholder="Costo del Productor"
+                    name="P"
+                    required
+                    v-model = "P"
+                >
+            </div>
+            <div class="mb-3">
+                <input 
+                    type="text" 
+                    class="form-control"
+                    placeholder="Tiempo de Espera"
+                    name="Tespera"
+                    required
+                    v-model = "Tespera"
+                >
+            </div>
+            <div class="mb-3">
+                <input 
+                    type="text" 
+                    class="form-control"
+                    placeholder="Dias del año"
+                    name="DiasAno"
+                    required
+                    v-model = "DiasAno"
+                >
+            </div>
+            <center>
+                <button class="btn btn-secondary" style="margin-right: 30px;" @click="llenarCampos()">Ejemplo</button>
+                <button type="submit" class="btn btn-success">Calcular</button>
+            </center>
+        </form>
+    {% endif %}
+</div>
+<script>
+    const app = {
+        data(){
+            return{
+                D: null,
+                Co: null,
+                Ch: null,
+                P: null,
+                Tespera: null,
+                DiasAno: null
+            }
+        },
+        methods:{
+            llenarCampos(){
+                this.D = 12000.00
+                this.Co = 25.00
+                this.Ch = 0.50
+                this.P = 2.50
+                this.Tespera = 5
+                this.DiasAno = 250
+
+            }
+        }
+    }
+    Vue.createApp(app).mount("#app")
+</script>
+{% endblock %}

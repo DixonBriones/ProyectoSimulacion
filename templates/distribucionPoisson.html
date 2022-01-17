@@ -1,0 +1,61 @@
+{% extends 'index.html' %}
+{% block title %} Congruencia lineal {% endblock %}
+{% block content %}
+{% if imagen %}
+<center>
+    <br>
+    <h2 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+        <strong>Resultados</strong>
+    </h2>
+    <br>
+</center>
+<h3>Datos generados</h3>
+<br>
+<div class="card my-3 w-100">
+    <div class="row g-0">
+        <div class="col-md-8">
+            <img src="data:image/png;base64,{{imagen}}" class="img-fluid rounded-start" alt="grafica">
+        </div>
+        <div class="col-md-4">
+            <div class="card-body">
+                <center>
+                    <br><br><br><br><br>
+                    <h5 class="card-title">Grafica de la Distribucion de Poisson</h5>
+                </center>
+                <p class="card-text" align="justify">
+                    La distribución de Poisson es una distribución discreta usadas en simulación donde el área de
+                    oportunidad para la ocurrencia de un evento es grande, si se conoce el número promedio "éxitos"
+                    que ocurren. se utiliza en muchos sistemas de la vida real: <br>
+                    Numeros de defectos de un determinado material <br>
+                    Número de multas que detecta un radar por día
+
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<center>
+    <br>
+    <h2 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><strong>Distribucion de
+            Poisson</strong>
+    </h2>
+    <br><br>
+</center>
+{% if error %}
+<div class="alert alert-danger" role="alert">
+    {{ error }}
+</div>
+{% endif %}
+<form action="/distribucionPoisson" method="POST">
+    <center>
+    <div class="mb-3">
+        
+            <input type="number" class="form-control" placeholder="Landa" style="width: 800px;" name="landa" required>
+         
+    </div>
+    <button type="submit" class="btn btn-success " >Calcular</button>
+    </center>
+</form>
+{% endif %}
+{% endblock %}

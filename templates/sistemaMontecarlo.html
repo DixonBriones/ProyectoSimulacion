@@ -1,0 +1,75 @@
+{% extends 'index.html' %}
+{% block title %} Montecarlo {% endblock %}
+{% block content %}
+<center>
+    <br>
+    <h2 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><strong>Regresión Cuadratica</strong>
+    </h2>
+    <br><br>
+</center>
+    {% if error %}
+        <div class="alert alert-danger" role="alert"> 
+            {{ error }}
+        </div>
+    {% endif %}
+    <form enctype="multipart/form-data" method="POST" action="{{url_for('calcularMontecarlo')}}"><br>
+        <div class="col-sm-12">
+            <div class="form-row">
+                <legend class="header"><strong>Método congruencial lineal</strong></legend><br><br>
+                <div class=" mb-3">
+                    <label for="validationDefault01">Número iteraciones (n)</label>
+                    <input name="numeroIteraciones" type="text" class="form-control" id="validationDefault01"
+                        required>
+                </div>
+                <div class=" mb-3">
+                    <label for="validationDefault02">Semilla (X0)</label>
+                    <input name="semilla" type="text" class="form-control" id="validationDefault02" required>
+                </div>
+                <div class="mb-3">
+                    <label for="validationDefault01">Multiplicador (a)</label>
+                    <input name="multiplicador" type="text" class="form-control" id="validationDefault01"
+                        required>
+                </div>
+                <div class=" mb-3">
+                    <label for="validationDefault02">Incremento (c)</label>
+                    <input name="incremento" type="text" class="form-control" id="validationDefault02" required>
+                </div>
+                <div class="mb-3">
+                    <label for="validationDefault01">Módulo (m)</label>
+                    <input name="modulo" type="text" class="form-control" id="validationDefault01" required>
+                </div><br>
+                <legend class="header"><strong>Subir archivo</strong></legend><br><br>
+                <div class="form-row">
+                    <div class=" mb-3">
+                        <input name="file" type="file" class="form-control-file form-data" id="exampleFormControlFile1"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="validationDefault01">Ingrese el nombre de la columna X</label>
+                        <input name="x" type="text" class="form-control" id="validationDefault01"
+                            required>
+                    </div>
+                    <div class=" mb-3">
+                        <label for="validationDefault01">Ingrese el nombre de la columna Y</label>
+                        <input name="y" type="text" class="form-control" id="validationDefault01"
+                            required>
+                    </div>
+                </div>
+                <div class=" mb-3">
+                    <label for="validationDefault01">Tipo de Archivo</label>
+                    <select name="tipoarchivo" required>
+                        <option value="1">Excel</option> 
+                        <option value="2">csv </option> 
+                        <option value="3">json</option>
+                        
+                    </select>
+                </div>
+            </div>
+            <center>
+            <button type="submit" class="btn btn-success" style="width: 300px;">Calcular</button>
+
+            </center>
+        </div>
+    </form>
+
+{% endblock %}

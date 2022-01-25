@@ -71,12 +71,13 @@ class Estadistica:
         x = self.df["Provincia"]
         t1= self.df["2014"]
         t2= self.df["2015"]
-        t3= self.df["2017"]
-        t4= self.df["2018"]
-        t5= self.df["2019"]
+        t3= self.df["2016"]
+        t4= self.df["2017"]
+        t5= self.df["2018"]
+        t6= self.df["2019"]
 
         plt.figure(figsize=(10,5))
-        plt.plot(x,t1,x,t2,x,t3,x,t4,x,t5,marker='o')
+        plt.plot(x,t1,x,t2,x,t3,x,t4,x,t5,x,t6,marker='o')
         plt.xlabel('Provincia')
         plt.ylabel('Cantidad de muertes')
 
